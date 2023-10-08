@@ -93,10 +93,10 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.mysme.app"
+    namespace "com.etap.app"
     defaultConfig {
         multiDexEnabled true
-        applicationId "com.mysme.app"
+        applicationId "com.etap.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 5
