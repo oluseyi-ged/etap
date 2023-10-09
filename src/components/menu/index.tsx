@@ -17,30 +17,10 @@ export const NavMenu = ({state, descriptors, navigation}: any) => {
       case 'more':
         return (
           <View>
-            <SvgIcon name={status ? 'more-active' : 'more'} size={25} />
-            <SizedBox height={6} />
-            <Text style={[!status ? styles.navText : styles.navActive]}>
-              More
-            </Text>
-          </View>
-        );
-      case 'cards':
-        return (
-          <View>
-            <SvgIcon name={status ? 'card-active' : 'card'} size={25} />
-            <SizedBox height={6} />
-            <Text style={[!status ? styles.navText : styles.navActive]}>
-              Collections
-            </Text>
-          </View>
-        );
-      case 'bills':
-        return (
-          <View>
             <SvgIcon name={status ? 'bill-active' : 'bill'} size={25} />
             <SizedBox height={6} />
             <Text style={[!status ? styles.navText : styles.navActive]}>
-              Payments
+              History
             </Text>
           </View>
         );
@@ -65,14 +45,14 @@ export const NavMenu = ({state, descriptors, navigation}: any) => {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         alignSelf: 'center',
         paddingHorizontal: HDP(30),
         paddingBottom: HDP(Platform.OS === 'android' ? 4 : 10),
         position: 'absolute',
         bottom: HP(Platform.OS === 'android' ? -2 : -1.5),
         borderTopWidth: 1,
-        borderTopColor: 'rgba(238, 238, 238, 0.25)',
+        borderTopColor: '#00000020',
       }}>
       {state.routes.map((route: any, index: any) => {
         const {options} = descriptors[route.key];
@@ -119,8 +99,8 @@ export const NavMenu = ({state, descriptors, navigation}: any) => {
                   paddingVertical: HDP(10),
                 },
                 isFocused && {
-                  borderTopColor: '#6CCF00',
-                  borderTopWidth: 4,
+                  borderTopColor: 'red',
+                  borderTopWidth: 2,
                 },
               ]}>
               <MenuIcons label={label} status={isFocused} />
