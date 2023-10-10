@@ -1,20 +1,20 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {configureStore} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/dist/query/react';
-import logReducer from '@slices/log';
+import logsReducer from '@slices/logs';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {combineReducers} from 'redux';
 import {persistReducer} from 'redux-persist';
 import thunkMiddleware from 'redux-thunk';
 
 const reducers = combineReducers({
-  log: logReducer,
+  logs: logsReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['log'],
+  whitelist: ['logs'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

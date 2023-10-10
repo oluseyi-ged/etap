@@ -1,4 +1,4 @@
 export * from './FlashMessageConfig';
 export * from './dataSimulator';
-export * from './fuelPrediction';
+export * from './prediction';
 export * from './string';

@@ -4,14 +4,14 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   navText: {
-    fontSize: RF(8),
+    fontSize: RF(14),
     fontFamily: family.Medium,
     color: palette.lightText,
   },
   navActive: {
-    fontSize: RF(8),
+    fontSize: RF(14),
     fontFamily: family.Medium,
-    color: '#6CCF00',
+    color: palette.black,
   },
 });
 

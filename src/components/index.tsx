@@ -1,3 +1,4 @@
+export * from './accordion';
 export * from './bottom-sheet';
 export * from './buttons';
 export * from './date-picker';

@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {SizedBox} from '@components';
-import {setLog} from '@slices/log';
+import {setLogs} from '@slices/logs';
+import {predictFuelRefill, predictOverheating, predictOverspeed} from '@utils';
 import generateRandomDataAsync from '@utils/dataSimulator';
 import {generateSimulatedJourneyData} from '@utils/simulatedLog';
 import React, {FC, useEffect, useState} from 'react';
@@ -13,8 +14,8 @@ import style from './styles';
 
 export const Home: FC = ({navigation}: any) => {
   const [isJourneyActive, setJourneyActive] = useState(false);
-  const {log} = useAppSelector<any>((store: RootState) => store);
-  console.log('first', typeof log);
+  const {logs} = useAppSelector<any>((store: RootState) => store);
+  console.log('first', typeof logs);
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<any>({
@@ -59,6 +60,7 @@ export const Home: FC = ({navigation}: any) => {
     {
       key: 'Speed',
       value: `${data?.speed} KM/h`,
+      error: isJourneyActive ? predictOverspeed(data?.speed) : '',
     },
     {
       key: 'RPM',
@@ -67,10 +69,12 @@ export const Home: FC = ({navigation}: any) => {
     {
       key: 'Fuel Level',
       value: `${data?.fuelLevel}%`,
+      error: isJourneyActive ? predictFuelRefill(data?.fuelLevel, 0.3) : '',
     },
     {
       key: 'Engine Temp.',
       value: `${data?.engineTemperature}°C`,
+      error: isJourneyActive ? predictOverheating(data?.engineTemperature) : '',
     },
   ];
 
@@ -93,8 +97,11 @@ export const Home: FC = ({navigation}: any) => {
           <View style={style.statGrid}>
             {dashboardData?.map((stat, i) => (
               <View style={style.statBox}>
-                <Text style={style.statValue}>{stat?.value}</Text>
-                <Text style={style.statKey}>{stat?.key}</Text>
+                <View>
+                  <Text style={style.statValue}>{stat?.value}</Text>
+                  <Text style={style.statKey}>{stat?.key}</Text>
+                </View>
+                <Text style={style.statErr}>{stat?.error}</Text>
               </View>
             ))}
           </View>
@@ -111,7 +118,7 @@ export const Home: FC = ({navigation}: any) => {
                 if (isJourneyActive) {
                   setJourneyActive(false);
                   console.log(generateSimulatedJourneyData());
-                  dispatch(setLog(generateSimulatedJourneyData()));
+                  dispatch(setLogs(generateSimulatedJourneyData()));
                 } else {
                   setJourneyActive(true);
                 }

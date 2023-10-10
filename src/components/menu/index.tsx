@@ -17,7 +17,7 @@ export const NavMenu = ({state, descriptors, navigation}: any) => {
       case 'more':
         return (
           <View>
-            <SvgIcon name={status ? 'bill-active' : 'bill'} size={25} />
+            <SvgIcon name={status ? 'home' : 'home'} size={30} />
             <SizedBox height={6} />
             <Text style={[!status ? styles.navText : styles.navActive]}>
               History
@@ -27,7 +27,7 @@ export const NavMenu = ({state, descriptors, navigation}: any) => {
       default:
         return (
           <View>
-            <SvgIcon name={status ? 'home' : 'home-inactive'} size={25} />
+            <SvgIcon name={status ? 'history' : 'history'} size={30} />
             <SizedBox height={6} />
             <Text style={[!status ? styles.navText : styles.navActive]}>
               Home
